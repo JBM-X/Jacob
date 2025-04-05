@@ -1,33 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Jacob Musyoka</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tech Jacob Musyoka - Interactive Website</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #5dade2, #2874A6);
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .glowing-text {
+            font-size: 2.5em;
+            color: white;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #87ceeb, 0 0 30px #00bfff;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ffffff, 0 0 20px #87ceeb, 0 0 30px #00bfff;
+            }
+            to {
+                text-shadow: 0 0 15px #ffffff, 0 0 30px #87ceeb, 0 0 40px #00bfff;
+            }
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .glowing-button {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, #1abc9c, #3498db);
+            border-radius: 5px;
+            color: white;
+            font-size: 1.2em;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glowing-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #1abc9c, 0 0 30px #3498db;
+        }
+
+        .info-box {
+            background: #1abc9c;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin: 20px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: scale(1.02);
+        }
+
+        .dark-mode {
+            background: black;
+            color: #d3d3d3;
+        }
+
+        .toggle-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-button:hover {
+            transform: scale(1.1);
+            background: #1abc9c;
+        }
+
+        .payment-btn, .pay-btn {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s ease;
+        }
+
+        .payment-btn {
+            background: #e74c3c;
+        }
+
+        .payment-btn:hover {
+            transform: scale(1.1);
+            background: #c0392b;
+        }
+
+        .pay-btn {
+            background: #2ecc71;
+            margin-top: 10px;
+        }
+
+        .pay-btn:hover {
+            transform: scale(1.1);
+            background: #27ae60;
+        }
+
+        @media (max-width: 600px) {
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .info-box {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
+    <button class="toggle-button" onclick="toggleDarkMode()">Dark Mode</button>
+    <header>
+        <h1 class="glowing-text">Welcome to Tech Jacob Musyoka</h1><p>Your one-stop destination for tech services</p>
+    </header>
+
     <nav>
-      <ul>
-        <li><a href="index.html" id="homeLink">Home</a></li>
-        <li><a href="about.html" id="aboutLink">About Me</a></li>
-        <li><a href="portfolio.html" id="portfolioLink">Portfolio</a></li>
-        <li><a href="contact.html" id="contactLink">Contact</a></li>
-      </ul>
+        <ul>
+            <li><a href="#home" class="glowing-button">Home</a></li>
+            <li><a href="#about" class="glowing-button">About</a></li>
+            <li><a href="#services" class="glowing-button">Services</a></li>
+            <li><a href="#contact" class="glowing-button">Contact</a></li>
+        </ul>
     </nav>
-  </header>
 
-  <section id="home">
-    <h1>Welcome to Tech Jacob Musyoka</h1>
-    <button id="whatsappBtn" class="glow-on-hover">Click here to chat on WhatsApp</button>
-    <button id="paymentBtn" class="glow-on-hover">Make Payment</button>
-  </section>
+    <section id="home">
+        <div class="info-box">
+            <h2>Device Information</h2>
+            <p>Mobile Type: <span id="device-name">Loading...</span></p>
+            <p>CPU Usage: <span id="cpu-usage">Fetching...</span></p>
+            <p>Memory: <span id="memory">Loading...</span></p>
+            <p>Location: <span id="location">Loading...</span></p>
+            <p>Current Time: <span id="time">Loading...</span></p>
+        </div>
+    </section>
 
-  <div id="device-info" class="info-box"></div>
-  <div id="current-time" class="info-box"></div>
-  <div id="location-info" class="info-box"></div>
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I'm Jacob Musyoka, a tech enthusiast ready to assist with graphic design, online applications, and more.</p>
+    </section>
 
-  <script src="script.js"></script>
+    <section id="services">
+        <h2>Services</h2>
+        <div class="info-box">
+            <h3>Graphic Design</h3>
+            <ul>
+                <li>Logo Design</li>
+                <li>Business Cards</li>
+                <li>Social Media Graphics</li>
+            </ul>
+        </div>
+        <div class="info-box">
+            <h3>Online Applications</h3>
+            <ul>
+                <li>KRA</li>
+                <li>HELB</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>Powered by Tech Jacob Musyoka</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener("click", function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute("href")).scrollIntoView({
+                    behavior: "smooth",
+                });
+            });
+        });
+
+        // Dark Mode Toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        // System Statistics and Interactivity
+        setInterval(() => {
+            document.getElementById("time").innerText = new Date().toLocaleString();
+        }, 1000);
+
+        window.onload = () => {
+            document.getElementById("device-name").innerText = navigator.userAgent;
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    document.getElementById("location").innerText = Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude};
+                });
+            } else {
+                document.getElementById("location").innerText = "Geolocation not available";
+            }
+
+            document.getElementById("cpu-usage").innerText = "Running Smoothly"; // Simulated CPU info
+            document.getElementById("memory").innerText = ${navigator.deviceMemory || "Unknown"} GB;
+        };
+    </script>
 </body>
 </html>
